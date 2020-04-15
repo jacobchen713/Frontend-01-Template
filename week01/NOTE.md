@@ -2,7 +2,7 @@
 
 ### 把课上老师的脑图里的这些实体补全
 
-[前端技术总结]
+[前端技术总结](https://github.com/jacobchen713/Frontend-01-Template/blob/master/week01/FE.xmind)
 
 ### 你能不能在 ECMA 中找到所有的类型（Type）
 
