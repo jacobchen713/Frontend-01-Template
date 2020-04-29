@@ -35,7 +35,7 @@ converStringToNumber('22.345e2') // 2234.5
 
 ### NumberToString
 ```javascript
-function converStringToNumber(number, scale) {
+function converNumberToString(number, scale) {
   var integer = Math.floor(number);
   // 精度问题
   var fraction = number - integer;
