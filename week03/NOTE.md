@@ -33,9 +33,9 @@ function converStringToNumber(string, scale = 10) {
 converStringToNumber('22.345e2') // 2234.5
 ```
 
-## 总结
+### 总结
 
-### 表达式
+#### 表达式
 Member
 - a.b
 - a[b]
