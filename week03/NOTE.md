@@ -33,6 +33,21 @@ function converStringToNumber(string, scale = 10) {
 converStringToNumber('22.345e2') // 2234.5
 ```
 
+### NumberToString
+```javascript
+function converStringToNumber(number, scale) {
+  var integer = Math.floor(number);
+  // 精度问题
+  var fraction = number - integer;
+  var string = '';
+  while(integer > 0) {
+    string = String(integer % scale);
+    integer = Math.floor( integer / scale);
+  }
+  return string;
+}
+```
+
 ### 总结
 
 #### 表达式
