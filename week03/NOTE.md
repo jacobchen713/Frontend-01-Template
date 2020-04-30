@@ -47,6 +47,54 @@ function converNumberToString(number, scale) {
   return string;
 }
 ```
+#### Built-in Exotic Object Internal Methods and Slots
+##### Bound Function Exotic Objects
+  - `[[Call]]`
+  - `[[Construct]]`
+##### Array Exotic Objects
+  - `[[DefineOwnProperty]]`
+  - `ArrayCreate(length[,proto])`
+  - `ArraySpeciesCreate(originalArray,length)`
+  - `ArraySetLength(A,Desc)`
+##### String Exotic Objects
+  - 有这些特性`[[GetOwnProperty]]`
+  - `[[DefineOwnProperty]]`
+  - `[[OwnPropertyKeys]]`
+  - `StringCreate(value,prototype)`
+  - `StringGetOwnProperty(S,P)`
+##### Arguments Exotic Objects
+  - `[[GetOwnProperty]]`
+  - `[[DefineOwnProperty]]`
+  - `[[Get]]`
+  - `[[Set]]`
+  - `[[Delete]]`
+  - `CreateUnmappedArgumentsObject(argumentsList)`
+  - `CreateMappedArgumentsObject(func,formals,argumentsList,env)`
+##### Integer-Indexed Exotic Objects
+  - `[[GetOwnProperty]]`
+  - `[[HasProperty]]`
+  - `[[DefineOwnProperty]]`
+  - `[[Get]]`
+  - `[[Set]]`
+  - `[[OwnPropertyKeys]]`
+  - `IntegerIndexedObjectCreate(prototype,internalSlotsList)`
+  - `IntegerIndexedElementGet(O,index)`
+  - `IntegerIndexedElementSet(O,index,value)`
+##### Module Namespace Exotic Objects
+  - `[[SetPrototypeOf]]`
+  - `[[IsExtensible]]`
+  - `[[PreventExtensions]]`
+  - `[[GetOwnProperty]]`
+  - `[[DefineOwnProperty]]`
+  - `[[HasProperty]]`
+  - `[[Get]]`
+  - `[[Set]]`
+  - `[[Delete]]`
+  - `[[OwnPropertyKeys]]`
+  - `ModuleNamespaceCreate(module,exports)`
+##### Immutable Prototype Exotic Objects
+  - `[[SetPrototypeOf]]`
+  - `SetImmutablePrototype`
 
 ### 总结
 
