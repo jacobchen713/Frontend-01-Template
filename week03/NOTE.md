@@ -57,7 +57,7 @@ function converNumberToString(number, scale) {
   - `ArraySpeciesCreate(originalArray,length)`
   - `ArraySetLength(A,Desc)`
 ##### String Exotic Objects
-  - 有这些特性`[[GetOwnProperty]]`
+  - `[[GetOwnProperty]]`
   - `[[DefineOwnProperty]]`
   - `[[OwnPropertyKeys]]`
   - `StringCreate(value,prototype)`
