@@ -1,4 +1,4 @@
-const cssParser = require('./parseCSS.js');
+const cssParser = require('./cssParser.js');
 
 let currentToken = null;
 let currentAttribute = null;
@@ -9,6 +9,7 @@ let stack = [
     children: [],
   }
 ];
+
 let currentTextNode = null;
 
 function emit(token) {
