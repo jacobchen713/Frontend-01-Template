@@ -44,7 +44,7 @@ function emit(token) {
 
     currentTextNode = null;
 
-  } else if(token.type = 'endTag') {
+  } else if(token.type === 'endTag') {
     if(top.tagName != token.tagName) {
       throw new Error("Tag start end doesn't match");
     } else {
@@ -124,7 +124,7 @@ function beforeAttributeName(c) {
   if(c.match(/^[\t\n\f ]$/)) {
     return beforeAttributeName;
   } else if(c === '/' || c === '>' || c === EOF) {
-    return afterAttributeName;
+    return afterAttributeName(c);
   } else if(c === '=') {
     
   } else {
@@ -159,7 +159,7 @@ function beforeAttributeValue(c) {
   } else if(c === '\'') {
     return singleQuotedAttributeValue;
   } else if(c === '>') {
-    // return data;
+    return data;
   } else {
     return UnquotedAttributeValue(c);
   }
@@ -189,7 +189,7 @@ function singleQuotedAttributeValue(c) {
 
   } else {
     currentAttribute.value += c;
-    return doubleQuotedAttributeValue;
+    return singleQuotedAttributeValue;
   }
 }
 
@@ -199,7 +199,7 @@ function afterQuotedAttributeValue(c) {
   } else if(c === '/') {
     return selfClosingStartTag;
   } else if(c === '>') {
-    currentToken[currentAttribute.name] =currentAttribute.value;
+    currentToken[currentAttribute.name] = currentAttribute.value;
     emit(currentToken);
     return data;
   } else if(c === EOF) {
@@ -223,9 +223,11 @@ function UnquotedAttributeValue(c) {
     return data;
   } else if(c === '\u0000') {
 
-  } else if(c === '\'' || c === '\"') {
+  } else if(c === '\'' || c === '\"' || c == '<' || c == '=' || c == '`') {
 
   } else if(c === EOF) {
+    
+  } else {
     currentAttribute.value += c;
     return UnquotedAttributeValue;
   }
@@ -269,6 +271,7 @@ function afterAttributeName(c) {
   } else if( c === '>') {
     currentToken[currentAttribute.name] = currentAttribute.value;
     emit(currentToken);
+    return data;
   } else if(c === EOF) {
 
   } else {
