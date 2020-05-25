@@ -1,5 +1,11 @@
 const cssParser = require('./cssParser.js');
 
+/**
+ * currentToken 用于保存当前标签
+ * type: 'startTag',
+ * tagName: ''
+ * 当遇到属性时，我们把属性加到当前currentToken上
+ */
 let currentToken = null;
 let currentAttribute = null;
 
@@ -13,7 +19,6 @@ let stack = [
 let currentTextNode = null;
 
 function emit(token) {
-  console.log(token)
   let top = stack[stack.length - 1];
 
   if(token.type === 'startTag') {
@@ -26,7 +31,7 @@ function emit(token) {
     element.tagName = token.tagName;
 
     for(let p in token) {
-      if(p !== 'type' || p != 'tagName') {
+      if(p !== 'type' && p != 'tagName') {
         element.attributes.push({
           name: p,
           value: token[p]
@@ -37,6 +42,7 @@ function emit(token) {
     element = cssParser.computeCSS(element);
 
     top.children.push(element);
+    element.parent = top;
 
     if(!token.isSelfClosing) {
       stack.push(element);
@@ -126,8 +132,9 @@ function beforeAttributeName(c) {
   } else if(c === '/' || c === '>' || c === EOF) {
     return afterAttributeName(c);
   } else if(c === '=') {
-    
+    // 报错 startTag后跟着“=”，即没有属性名
   } else {
+    // 收集属性名 创建属性节点
     currentAttribute = {
       name: '',
       value: ''
@@ -286,10 +293,10 @@ function afterAttributeName(c) {
 
 module.exports.parseHTML = function parseHTML(html) {
   let state = data;
-  console.log('-------', state)
   for(let c of html) {
     state = state(c);
   }
   state = state(EOF);
+  // console.log(stack[0].children)
   return stack[0];
 }
