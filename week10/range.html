@@ -1,0 +1,53 @@
+<html>
+  <head>
+    <title>TEST</title>
+  </head>
+  <body><h1>China</h1>
+    <!-- My comment ...  -->
+    <p>China is a popular country with...</p>
+    <div id="b">
+      <button>See details</button>
+    </div>
+    <div id="list">
+      <div>1</div>
+      <div>2</div>
+      <div>3</div>
+      <div>4</div>
+    </div>
+    <div id="numlist-1">123456789</div>
+    <div id="numlist-2">123<span style="background-color: pink;">456789</span>01234567</div>
+  </body>
+  <script>
+    let element = document.getElementById('list');
+
+    function reverseChildren(element) {
+      var l = element.children.length;
+      while(l-- > 0) {
+        console.log(element.children[l])
+        element.appendChild(element.children[l])
+      }
+    }
+
+    void function reverseChildrenByRange(element) {
+      let range = new Range();
+      range.selectNodeContents(element);
+      let fragment = range.extractContents();
+      let l = fragment.childNodes.length;
+      while(l-- > 0) {
+        fragment.appendChild(fragment.childNodes[l]);
+      }
+      element.appendChild(fragment);
+    }(element)
+
+    let ele1 = document.getElementById('numlist-1').childNodes[0];
+    // 移除[3, 6)
+    let range1 = new Range();
+    range1.setStart(ele1, 3);
+    range1.setEnd(ele1, 6);
+
+    let ele2 = document.getElementById('numlist-2');
+    let range2 = new Range();
+    range2.setStart(ele2.childNodes[0], 3);
+    range2.setEnd(ele2.childNodes[2], 3);
+  </script>
+</html>

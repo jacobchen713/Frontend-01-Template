@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style title="hello">
+    a::before {
+      color: red;
+      content: 'hello';
+    }
+  </style>
+  <link rel="stylesheet" title="xx" href="data:text/css,p%7Bcolor:blue%7D"></link>
+</head>
+<body>
+  <a id="abc"> world</a>
+  <script type="text/javascript">
+    let ele = document.getElementById('abc');
+    console.log(document.styleSheets)
+    // 修改属性
+    document.styleSheets[0].cssRules[0].style.color = 'lightgreen';
+
+    // console.log(getComputedStyle(ele));
+  </script>
+</body>
+</html>
