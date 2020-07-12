@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    let usedReactivities = [];
+    let handlers = new Map();
+
+    let object = {
+      a: 1,
+      b: 2
+    }
+
+    function reactive(obj) {
+      return new Proxy(obj, {
+        get(obj, prop) {
+          console.log('-get-', obj, prop);
+          // 依赖收集
+          usedReactivities.push([obj, prop]);
+          return obj[prop];
+        },
+        set(obj, prop, val) {
+          console.log('-set-', obj, prop, val);
+          obj[prop] = val;
+          if(handlers.get(obj) && handlers.get(obj).get(prop)) {
+            for(let handler of handlers.get(obj).get(prop)) {
+              handler();
+            }
+          }
+          return obj[prop];
+        }
+      });
+    }
+
+    function effect(handler) {
+      usedReactivities = [];
+      handler();
+      console.log('-usedReactivities-', usedReactivities, usedReactivities.length)
+      for(let usedReactivity of usedReactivities) {
+        let [obj, prop] = usedReactivity;
+        if(!handlers.has(obj)) {
+          handlers.set(obj, new Map());
+        }
+        if(!handlers.get(obj).has(prop)) {
+          handlers.get(obj).set(prop, []);
+        }
+
+        handlers.get(obj).get(prop).push(handler);
+      }
+    }
+
+    // let dummy;
+    // let proxy = reactive(object);
+
+    // effect(() => dummy = proxy.a);
+    // console.log('dummy:', dummy);
+    // proxy.a = 2;
+    // console.log('new dummy:', dummy);
+
+    // effect()函数内部执行回调函数handler() dummy = proxy.a 中 proxy.a 会调用proxy的get()函数；
+    // 在get()函数内收集当前操作的对象obj和属性prop，保存在全局usedReactivities数组中；
+    // 在effect()函数中保存回调函数handler()至全局Map对象handlers中；
+    // 当proxy.a重新改变时proxy.a = 2，会调用proxy的set()函数，
+    // 在set()函数中根据obj和prop，从全局Map对象handlers中取出回调函数handler()，执行 dummy = proxy.a 从而使dummy的值发生改变
+    
+
+    let v12, v1, v2;
+    let p1 = reactive({ a: 1 });
+    let p2 = reactive({ b: 2 });
+    effect(() => v12 = p1.a + p2.b);
+    effect(() => v1 = p1.a);
+    effect(() => v2 = p2.b);
+
+  </script>
+</body>
+</html>
