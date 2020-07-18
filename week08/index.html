@@ -8,8 +8,108 @@
     div.a#id {
       color: aqua;
     }
+    .baseline {
+      display: inline-block;
+      width: 1px;
+      /* height: 1px; */
+      overflow: visible;
+      vertical-align: baseline;
+      background-color: red;
+    }
+    .container-1 {
+      font-size: 30px;
+      line-height: 100px;
+      background-color: pink;
+    }
+    .line-1 {
+      display: inline-block;
+      width: 100px;
+      height: 100px;
+      background-color: aqua;
+      line-height: 70px;
+      /* vertical-align: top; */
+    }
+    .line-2 {
+      display: inline-block;
+      width: 100px;
+      height: 50px;
+      background-color: aqua;
+      /* line-height: 70px; */
+      vertical-align: bottom;
+    }
+    .line-3 {
+      display: inline-block;
+      width: 100px;
+      height: 550px;
+      background-color: plum;
+      line-height: 70px;
+      /* vertical-align: bottom; */
+    }
   </style>
   <body>
-    <div class="a" id="ids">123</div>
+    <div style="margin: 20px 0 5px;">
+      <span style="color: green;">top</span>
+      <span style="color: blue;">text-top</span>
+      <span style="color: yellow;">middle</span>
+      <span style="color: red;">baseline</span>
+      <span style="color: blue;">text-bottom</span>
+      <span style="color: green;">bottom</span>
+    </div>
+    <div class="container-1">
+      <div class="baseline" style="vertical-align: top;">
+        <div style="width: 1000px; height: 1px; background-color: green;"></div>
+      </div>
+      <div class="baseline" style="vertical-align: text-top;">
+        <div style="width: 1000px; height: 1px; background-color: blue;"></div>
+      </div>
+      <div class="baseline" style="vertical-align: middle;">
+        <div style="width: 1000px; height: 1px; background-color: yellow;"></div>
+      </div>
+      <div class="baseline">
+        <div style="width: 1000px; height: 1px; background-color: red;"></div>
+      </div>
+      <div class="baseline" style="vertical-align: text-bottom;">
+        <div style="width: 1000px; height: 1px; background-color: blue;"></div>
+      </div>
+      <div class="baseline" style="vertical-align: bottom;">
+        <div style="width: 1000px; height: 1px; background-color: green;"></div>
+      </div>
+      Hello
+    </div>
+    <div style="margin: 20px 0 5px;">
+      <span style="color: green;">top</span>
+      <span style="color: blue;">text-top</span>
+      <span style="color: yellow;">middle</span>
+      <span style="color: red;">baseline</span>
+      <span style="color: blue;">text-bottom</span>
+      <span style="color: green;">bottom</span>
+    </div>
+    <div class="container-1">
+      <div class="baseline" style="vertical-align: top;">
+        <div style="width: 1000px; height: 1px; background-color: green;"></div>
+      </div>
+      <div class="baseline" style="vertical-align: text-top;">
+        <div style="width: 1000px; height: 1px; background-color: blue;"></div>
+      </div>
+      <div class="baseline" style="vertical-align: middle;">
+        <div style="width: 1000px; height: 1px; background-color: yellow;"></div>
+      </div>
+      <div class="baseline">
+        <div style="width: 1000px; height: 1px; background-color: red;"></div>
+      </div>
+      <div class="baseline" style="vertical-align: text-bottom;">
+        <div style="width: 1000px; height: 1px; background-color: blue;"></div>
+      </div>
+      <div class="baseline" style="vertical-align: bottom;">
+        <div style="width: 1000px; height: 1px; background-color: green;"></div>
+      </div>
+      Hello
+      <div style="vertical-align:text-bottom; line-height:70px; width: 100px; height: 150px; background-color:aqua; display: inline-block;">1</div>
+      <div style="vertical-align:top; line-height:70px; width: 100px; height: 50px; background-color:aqua; display: inline-block;">1</div>
+      <div style="vertical-align:baseline; line-height:70px; width: 100px; height: 550px; background-color:plum; display: inline-block;">1</div>
+      <!-- <div class="line-1">1</div> -->
+      <!-- <div class="line-2">2</div> -->
+      <!-- <div class="line-3">3</div> -->
+    </div>
   </body>
 </html>

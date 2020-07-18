@@ -142,7 +142,6 @@ function foo() {
 }
 foo`Hello ${name}!`;
 
-
 function cls1(s) {
   console.log(s);
 }
